@@ -7,6 +7,20 @@ import Pizza from "../components/Pizza/Pizza";
 import Category from "../components/Category/Category";
 
 const Home = () => {
+  const [pizzas, setPizzas] = React.useState(null);
+
+  React.useEffect(() => {
+    try {
+      fetch("https://64295b91ebb1476fcc479b12.mockapi.io/items")
+        .then((res) => res.json())
+        .then((res) => setPizzas(res));
+    } catch (err) {
+      console.log(err);
+    }
+
+    return () => {};
+  }, []);
+
   return (
     <div className={s.appWrapper}>
       <div className={s.app}>
@@ -22,14 +36,13 @@ const Home = () => {
             </div>
 
             {/* pizzas */}
-            <h1>Все пиццы</h1>
+
             <div className={s.mainContent}>
               {/* список пицц */}
-              <Pizza />
-              <Pizza />
-              <Pizza />
-              <Pizza />
-              <Pizza />
+              {pizzas &&
+                pizzas.map((pizza, index) => (
+                  <Pizza key={pizza.id} pizza={pizza} />
+                ))}
             </div>
           </main>
         </div>

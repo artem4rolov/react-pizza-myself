@@ -1,38 +1,49 @@
 import React from "react";
 
 import s from "./Pizza.module.scss";
-import pizzaImage from "../../assets/pizza.png";
 
-const Pizza = () => {
-  const [activeDough, setActiveDough] = React.useState("тонкое");
-  const [activeSize, setActiveSize] = React.useState("32 см");
+const Pizza = ({ pizza }) => {
+  const [activeDough, setActiveDough] = React.useState(0);
+  const [activeSize, setActiveSize] = React.useState(0);
+
+  console.log(pizza);
+
+  const dough = ["тонкое", "традиционное"];
 
   return (
-    <div className={s.pizzaContainer}>
-      <div className={s.pizzaBlock}>
-        {/* image пиццы */}
-        <img src={pizzaImage} alt="pizza bg" />
-        <span className={s.pizzaTitle}>Чизбургер пицца</span>
-        <div className={s.pizzaMenu}>
-          {/* меню выбора теста */}
-          <div className={s.pizzaDough}>
-            <span className={s.doughVariant}>тонкое</span>
-            <span className={s.doughVariant}>традиционное</span>
-          </div>
-          {/* меню выбора размера */}
-          <div className={s.pizzaSize}>
-            <span className={`form-control round-lg ${s.sizeVariant}`}>
-              26 см.
+    <div className={s.pizzaBlock}>
+      {/* image пиццы */}
+      <img src={pizza.imageUrl} alt="pizza bg" />
+      <span className={s.pizzaTitle}>{pizza.title}</span>
+      <div className={s.pizzaMenu}>
+        {/* меню выбора теста */}
+        <div className={s.pizzaDough}>
+          {pizza.types.map((type, index) => (
+            <span
+              className={index === activeDough ? s.active : ""}
+              onClick={() => setActiveDough(index)}
+            >
+              {dough[type]}
             </span>
-            <span className={s.sizeVariant}>36 см.</span>
-            <span className={s.sizeVariant}>46 см.</span>
-          </div>
+          ))}
         </div>
-        {/* цена пиццы и кнопка добавления в корзину */}
-        <div className={s.pizzaFooter}>
-          <span className={s.pizzaPrice}>от 395 ₽</span>
-          <button className={s.pizzaButton}>+ Добавить 2</button>
+        {/* меню выбора размера */}
+        <div className={s.pizzaSize}>
+          {pizza.sizes.map((size, index) => (
+            <span
+              key={index}
+              className={index === activeSize ? s.active : ""}
+              onClick={() => setActiveSize(index)}
+            >
+              {size}
+            </span>
+          ))}
         </div>
+      </div>
+      {/* цена пиццы и кнопка добавления в корзину */}
+      <div className={s.pizzaFooter}>
+        <span className={s.pizzaPrice}>от {pizza.price} ₽</span>
+        <button className={s.pizzaButton}>+ Добавить</button>
       </div>
     </div>
   );
