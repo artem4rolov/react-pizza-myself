@@ -14,8 +14,6 @@ const Category = () => {
     "Закрытые",
   ];
 
-  console.log(active);
-
   return (
     <nav className={s.nav}>
       {data.map((category, index) => (

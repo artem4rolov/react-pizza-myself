@@ -6,6 +6,10 @@
   gap: 8px;
   width: 300px;
 
+  @media (max-width: 980px) {
+    justify-content: center;
+  }
+
   .sortLabel {
     font-size: 14px;
     font-weight: 700;

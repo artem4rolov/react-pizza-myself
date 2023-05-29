@@ -22,8 +22,8 @@ const Home = () => {
             </div>
 
             {/* pizzas */}
+            <h1>Все пиццы</h1>
             <div className={s.mainContent}>
-              <h1>Все пиццы</h1>
               {/* список пицц */}
               <Pizza />
               <Pizza />
