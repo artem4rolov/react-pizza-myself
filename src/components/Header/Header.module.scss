@@ -1,0 +1,69 @@
+.header {
+  border-bottom: 1px solid #f7f7f7;
+  padding: 50px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .headerLogo {
+    display: flex;
+    align-items: center;
+    min-width: 300px;
+    gap: 17px;
+
+    img {
+      width: 38px;
+      height: 38px;
+    }
+
+    .logoText {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      text-align: left;
+
+      .logoTitle {
+        font-size: 24px;
+        font-weight: 800;
+      }
+
+      .logoSubTitle {
+        font-size: 16px;
+        font-weight: 400;
+        color: #7b7b7b;
+      }
+    }
+  }
+
+  .headerButton {
+    background: #fe5f1e;
+    color: #fff;
+    width: 130px;
+    padding: 15px 15px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .totalPrice {
+      flex: 1;
+      padding-right: 13px;
+      border-right: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .totalCount {
+      margin-left: 13px;
+
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+}
