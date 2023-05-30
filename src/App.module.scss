@@ -58,10 +58,11 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-          gap: 20px;
+          padding: 10px 20px;
 
           @media (max-width: 980px) {
             flex-direction: column;
+            gap: 20px;
           }
         }
       }

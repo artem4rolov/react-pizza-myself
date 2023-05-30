@@ -6,8 +6,6 @@ const Pizza = ({ pizza }) => {
   const [activeDough, setActiveDough] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
 
-  console.log(pizza);
-
   const dough = ["тонкое", "традиционное"];
 
   return (
@@ -20,6 +18,7 @@ const Pizza = ({ pizza }) => {
         <div className={s.pizzaDough}>
           {pizza.types.map((type, index) => (
             <span
+              key={index}
               className={index === activeDough ? s.active : ""}
               onClick={() => setActiveDough(index)}
             >

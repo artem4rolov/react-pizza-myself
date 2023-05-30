@@ -2,9 +2,7 @@ import React from "react";
 
 import s from "./Category.module.scss";
 
-const Category = () => {
-  const [active, setActive] = React.useState(0);
-
+const Category = ({ activeCategory, setActiveCategory }) => {
   const data = [
     "Все",
     "Мясные",
@@ -19,8 +17,8 @@ const Category = () => {
       {data.map((category, index) => (
         <li
           key={index}
-          className={`${active === index ? s.active : ""}`}
-          onClick={() => setActive(index)}
+          className={`${activeCategory === index ? s.active : ""}`}
+          onClick={() => setActiveCategory(index)}
         >
           {category}
         </li>
