@@ -3,7 +3,8 @@ import s from "./Header.module.scss";
 
 import Logo from "../../assets/logo.svg";
 import Cart from "../../assets/cart.svg";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
+import Search from "../Search/Search";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -14,12 +15,11 @@ const Header = () => {
       <div className={s.headerLogo} onClick={() => navigate("/")}>
         <img src={Logo} alt="" />
         <div className={s.logoText}>
-          <span className={s.logoTitle}>REACT PIZZA</span>
-          <span className={s.logoSubTitle}>
-            самая вкусная пицца во вселенной
-          </span>
+          <span className={s.logoTitle}>PIZZA</span>
+          <span className={s.logoSubTitle}>норм такая пицца</span>
         </div>
       </div>
+      <Search />
       {/* button cart */}
       <div className={s.headerButton} onClick={() => navigate("/cart")}>
         <div className={s.totalPrice}>520 ₽</div>

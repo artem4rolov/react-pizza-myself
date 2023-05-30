@@ -4,10 +4,12 @@ import s from "./Home.module.scss";
 import Sort from "../../components/Sort/Sort";
 import Pizza from "../../components/Pizza/Pizza";
 import Category from "../../components/Category/Category";
+import { SearchContext } from "../../App";
 
 const Home = () => {
-  const [loading, setLoading] = React.useState(false);
   const [pizzas, setPizzas] = React.useState(null);
+
+  const { input } = React.useContext(SearchContext);
 
   // сортировка по (популярности, алфавиту, цене)
   const [activeSort, setActiveSort] = React.useState({
@@ -31,11 +33,14 @@ const Home = () => {
   }, []);
 
   React.useEffect(() => {
+    const category = activeCategory ? `&category=${activeCategory}` : "";
+    const sort = `&sortBy=${activeSort.key}`;
+    const order = `&order=${activeSort.order}`;
+    const search = `&search=${input}`;
+
     try {
       fetch(
-        `https://64295b91ebb1476fcc479b12.mockapi.io/items?category=${
-          activeCategory !== 0 ? activeCategory : ""
-        }&sortBy=${activeSort.key}&order=${activeSort.order}`
+        `https://64295b91ebb1476fcc479b12.mockapi.io/items?${category}${sort}${order}${search}`
       )
         .then((res) => res.json())
         .then((res) => setPizzas(res));
@@ -44,10 +49,7 @@ const Home = () => {
     }
 
     return () => {};
-  }, [activeCategory, activeSort]);
-
-  console.log("сортировка по " + activeSort);
-  console.log("категория пиццы " + activeCategory);
+  }, [activeCategory, activeSort, input]);
 
   return (
     <main className={s.main}>

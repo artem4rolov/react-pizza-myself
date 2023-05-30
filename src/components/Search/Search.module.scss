@@ -1,0 +1,37 @@
+.searchContainer {
+  width: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  padding: 10px 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  &:hover {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  img {
+    width: 15px;
+    height: 15px;
+    opacity: 0.5;
+
+    &.close {
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  input {
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    border: none;
+  }
+}

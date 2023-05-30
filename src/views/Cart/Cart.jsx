@@ -1,9 +1,13 @@
 import React from "react";
 
 import s from "./Cart.module.scss";
+import CartImage from "../../assets/cart.svg";
 import CartItem from "../../components/CartItem/CartItem";
+import { useNavigate } from "react-router";
 
 const Cart = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={s.content}>
       <div className={`${s.container} ${s.container__cart}`}>
@@ -98,8 +102,8 @@ const Cart = () => {
               </span>
             </div>
             <div className={s.cart__bottom_buttons}>
-              <a
-                href="/"
+              <div
+                onClick={() => navigate("/")}
                 className={`${s.button} ${s.button__outline} ${s.button__add} ${s.go_back_btn}`}
               >
                 <svg
@@ -119,11 +123,30 @@ const Cart = () => {
                 </svg>
 
                 <span>Вернуться назад</span>
-              </a>
+              </div>
               <div className={`${s.button} ${s.pay_btn}`}>
                 <span>Оплатить сейчас</span>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* если корзина пустая */}
+        <div class={`${s.cart} ${s.cart__empty}`}>
+          <h2>
+            Корзина пустая <icon>😕</icon>
+          </h2>
+          <p>
+            Вероятней всего, вы не заказывали ещё пиццу.
+            <br />
+            Для того, чтобы заказать пиццу, перейди на главную страницу.
+          </p>
+          <img src={CartImage} alt="Empty cart" />
+          <div
+            class={`${s.button} ${s.button__black}`}
+            onClick={() => navigate("/")}
+          >
+            <span>Вернуться назад</span>
           </div>
         </div>
       </div>
