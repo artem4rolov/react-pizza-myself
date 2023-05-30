@@ -1,9 +1,9 @@
 import React from "react";
 
-import s from "../App.module.scss";
-import Sort from "../components/Sort/Sort";
-import Pizza from "../components/Pizza/Pizza";
-import Category from "../components/Category/Category";
+import s from "./Home.module.scss";
+import Sort from "../../components/Sort/Sort";
+import Pizza from "../../components/Pizza/Pizza";
+import Category from "../../components/Category/Category";
 
 const Home = () => {
   const [loading, setLoading] = React.useState(false);

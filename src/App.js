@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
-import Home from "./views/Home";
-import Cart from "./views/Cart";
-import Error from "./views/Error";
+import Home from "./views/Home/Home";
+import Cart from "./views/Cart/Cart";
+import Error from "./views/Error/Error";
 import Header from "./components/Header/Header";
 
 import s from "./App.module.scss";

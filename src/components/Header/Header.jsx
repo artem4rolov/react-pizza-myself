@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <header className={s.header}>
       {/* logo and desc */}
-      <div className={s.headerLogo}>
+      <div className={s.headerLogo} onClick={() => navigate("/")}>
         <img src={Logo} alt="" />
         <div className={s.logoText}>
           <span className={s.logoTitle}>REACT PIZZA</span>
