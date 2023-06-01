@@ -1,9 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 import s from "./Cart.module.scss";
+
 import CartImage from "../../assets/cart.svg";
 import CartItem from "../../components/CartItem/CartItem";
-import { useNavigate } from "react-router";
 
 const Cart = () => {
   const navigate = useNavigate();

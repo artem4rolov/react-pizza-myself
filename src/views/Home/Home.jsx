@@ -1,46 +1,32 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-import s from "./Home.module.scss";
 import Sort from "../../components/Sort/Sort";
 import Pizza from "../../components/Pizza/Pizza";
 import Category from "../../components/Category/Category";
+import Pagination from "../../components/Pagination/Pagination";
 import { SearchContext } from "../../App";
 
+import s from "./Home.module.scss";
+
 const Home = () => {
+  const { categoryId, sort } = useSelector((state) => state.filter);
+  const { page } = useSelector((state) => state.pizza);
   const [pizzas, setPizzas] = React.useState(null);
 
   const { input } = React.useContext(SearchContext);
 
-  // сортировка по (популярности, алфавиту, цене)
-  const [activeSort, setActiveSort] = React.useState({
-    value: "популярности",
-    key: "rating",
-    order: "asc",
-  });
-  // сортировка по категории пиццы
-  const [activeCategory, setActiveCategory] = React.useState(0);
-
   React.useEffect(() => {
-    try {
-      fetch("https://64295b91ebb1476fcc479b12.mockapi.io/items")
-        .then((res) => res.json())
-        .then((res) => setPizzas(res));
-    } catch (err) {
-      console.log(err);
-    }
-
-    return () => {};
-  }, []);
-
-  React.useEffect(() => {
-    const category = activeCategory ? `&category=${activeCategory}` : "";
-    const sort = `&sortBy=${activeSort.key}`;
-    const order = `&order=${activeSort.order}`;
+    const category = categoryId ? `&category=${categoryId}` : "";
+    const sorting = `&sortBy=${sort.key}`;
+    const order = `&order=${sort.order}`;
     const search = `&search=${input}`;
 
     try {
       fetch(
-        `https://64295b91ebb1476fcc479b12.mockapi.io/items?${category}${sort}${order}${search}`
+        `https://64295b91ebb1476fcc479b12.mockapi.io/items?page=${
+          page + 1
+        }&limit=4${category}${sorting}${order}${search}`
       )
         .then((res) => res.json())
         .then((res) => setPizzas(res));
@@ -49,26 +35,23 @@ const Home = () => {
     }
 
     return () => {};
-  }, [activeCategory, activeSort, input]);
+  }, [categoryId, sort, input, page]);
 
   return (
     <main className={s.main}>
       <div className={s.mainNav}>
         {/* популярность, цена, алфавит */}
-        <Category
-          activeCategory={activeCategory}
-          setActiveCategory={setActiveCategory}
-        />
+        <Category />
         {/* сортировка по категориям */}
-        <Sort activeSort={activeSort} setActiveSort={setActiveSort} />
+        <Sort />
       </div>
-
       {/* pizzas */}
       <div className={s.mainContent}>
         {/* список пицц */}
         {pizzas &&
           pizzas.map((pizza, index) => <Pizza key={pizza.id} pizza={pizza} />)}
       </div>
+      <Pagination />
     </main>
   );
 };

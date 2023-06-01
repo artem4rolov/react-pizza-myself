@@ -1,8 +1,13 @@
 import React from "react";
 
 import s from "./Category.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { setCatgeoryId } from "../../redux/slices/filterSlice";
 
 const Category = ({ activeCategory, setActiveCategory }) => {
+  const dispatch = useDispatch();
+  const { categoryId } = useSelector((state) => state.filter);
+
   const data = [
     "Все",
     "Мясные",
@@ -17,8 +22,8 @@ const Category = ({ activeCategory, setActiveCategory }) => {
       {data.map((category, index) => (
         <li
           key={index}
-          className={`${activeCategory === index ? s.active : ""}`}
-          onClick={() => setActiveCategory(index)}
+          className={`${categoryId === index ? s.active : ""}`}
+          onClick={() => dispatch(setCatgeoryId(index))}
         >
           {category}
         </li>

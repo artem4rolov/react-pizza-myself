@@ -1,0 +1,32 @@
+// навигация
+.navigationButtons {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-inline-start: 0;
+}
+
+.navigationButtons a {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  border: 1px solid #fe5f1e;
+  color: #fe5f1e;
+  cursor: pointer;
+}
+
+.navigationButtons a:hover {
+  color: white;
+  background-color: #fe5f1e;
+}
+
+.navigationActive a {
+  color: white;
+  background-color: #fe5f1e;
+}
+
+.navigationDisabled a {
+  color: grey;
+  background-color: grey;
+}

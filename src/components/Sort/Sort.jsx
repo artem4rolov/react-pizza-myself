@@ -1,12 +1,18 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { setSort } from "../../redux/slices/filterSlice";
 
 import s from "./Sort.module.scss";
-
 import ArrowUp from "../../assets/arrowUp.svg";
 
-const Sort = ({ activeSort, setActiveSort }) => {
+const Sort = () => {
+  const dispatch = useDispatch();
+  const { sort } = useSelector((state) => state.filter);
+
   const [open, setOpen] = React.useState(false);
 
+  // пункты фильтрации
   const data = [
     { value: "популярности (по возрастанию)", key: "rating", order: "asc" },
     { value: "популярности (по убыванию)", key: "rating", order: "desc" },
@@ -21,12 +27,12 @@ const Sort = ({ activeSort, setActiveSort }) => {
       <img src={ArrowUp} alt="arrow up" />
       <span className={s.sortLabel}>Сортировка по:</span>
       <label className={s.sortValue} onClick={() => setOpen((prev) => !prev)}>
-        {activeSort.value}
+        {sort.value}
       </label>
       {open && (
         <div className={s.sortPopup}>
           {data.map((item, index) => (
-            <span key={index} onClick={() => setActiveSort(item)}>
+            <span key={index} onClick={() => dispatch(setSort(item))}>
               {item.value}
             </span>
           ))}

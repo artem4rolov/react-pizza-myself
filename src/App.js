@@ -13,8 +13,6 @@ function App() {
   // для временного решения с контекстом
   const [input, setInput] = React.useState("");
 
-  console.log(input);
-
   return (
     <SearchContext.Provider value={{ input, setInput }}>
       <div className={s.appWrapper}>
