@@ -11,10 +11,10 @@ export const SearchContext = React.createContext("");
 
 function App() {
   // для временного решения с контекстом
-  const [input, setInput] = React.useState("");
+  const [searchValue, setSearchValue] = React.useState("");
 
   return (
-    <SearchContext.Provider value={{ input, setInput }}>
+    <SearchContext.Provider value={{ searchValue, setSearchValue }}>
       <div className={s.appWrapper}>
         <div className={s.app}>
           <div className={s.container}>

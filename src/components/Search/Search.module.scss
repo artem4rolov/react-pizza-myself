@@ -1,8 +1,18 @@
 .searchContainer {
-  width: 300px;
+  width: 280px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 30px;
   padding: 10px 15px;
+  margin: 0 0 0 -100px;
+
+  @media (max-width: 800px) {
+    width: 160px;
+  }
+
+  @media (max-width: 650px) {
+    width: 260px;
+    margin: 0;
+  }
 
   display: flex;
   justify-content: center;

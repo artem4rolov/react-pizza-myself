@@ -16,7 +16,7 @@ const Header = () => {
         <img src={Logo} alt="" />
         <div className={s.logoText}>
           <span className={s.logoTitle}>PIZZA</span>
-          <span className={s.logoSubTitle}>норм такая пицца</span>
+          <span className={s.logoSubTitle}>лучшая пицца</span>
         </div>
       </div>
       <Search />

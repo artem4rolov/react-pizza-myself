@@ -3,10 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   categoryId: 0,
   sort: {
-    value: "популярности",
+    value: "популярности (по возрастанию)",
     key: "rating",
     order: "asc",
   },
+  page: 0,
 };
 
 export const filterSlice = createSlice({
@@ -21,9 +22,13 @@ export const filterSlice = createSlice({
     setSort: (state, action) => {
       state.sort = action.payload;
     },
+    // пагинация
+    setPage: (state, action) => {
+      state.page = action.payload;
+    },
   },
 });
 
-export const { setCatgeoryId, setSort } = filterSlice.actions;
+export const { setCatgeoryId, setSort, setPage } = filterSlice.actions;
 
 export default filterSlice.reducer;

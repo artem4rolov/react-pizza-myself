@@ -1,20 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  page: 0,
-};
+const initialState = {};
 
 export const pizzaSlice = createSlice({
   name: "pizza",
   initialState,
-  reducers: {
-    // пагинация
-    setPage: (state, action) => {
-      state.page = action.payload;
-    },
-  },
+  reducers: {},
 });
 
-export const { setPage } = pizzaSlice.actions;
+export const {} = pizzaSlice.actions;
 
 export default pizzaSlice.reducer;

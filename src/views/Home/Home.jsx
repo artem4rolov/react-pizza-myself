@@ -8,34 +8,45 @@ import Pagination from "../../components/Pagination/Pagination";
 import { SearchContext } from "../../App";
 
 import s from "./Home.module.scss";
+import axios from "axios";
+import QueryString from "qs";
 
 const Home = () => {
-  const { categoryId, sort } = useSelector((state) => state.filter);
-  const { page } = useSelector((state) => state.pizza);
+  const { categoryId, sort, page } = useSelector((state) => state.filter);
   const [pizzas, setPizzas] = React.useState(null);
 
-  const { input } = React.useContext(SearchContext);
+  // значение поля поиска из контекста (App.js)
+  const { searchValue } = React.useContext(SearchContext);
 
   React.useEffect(() => {
-    const category = categoryId ? `&category=${categoryId}` : "";
+    const category =
+      categoryId && !searchValue ? `&category=${categoryId}` : "";
     const sorting = `&sortBy=${sort.key}`;
     const order = `&order=${sort.order}`;
-    const search = `&search=${input}`;
+    const search = searchValue ? `&search=${searchValue}` : "";
 
     try {
-      fetch(
-        `https://64295b91ebb1476fcc479b12.mockapi.io/items?page=${
-          page + 1
-        }&limit=4${category}${sorting}${order}${search}`
-      )
-        .then((res) => res.json())
-        .then((res) => setPizzas(res));
+      axios
+        .get(
+          `https://64295b91ebb1476fcc479b12.mockapi.io/items?page=${
+            page + 1
+          }&limit=4${category}${sorting}${order}${search}`
+        )
+        .then((res) => setPizzas(res.data));
     } catch (err) {
       console.log(err);
     }
 
+    const url = `page=${
+      page + 1
+    }&limit=4${category}${sorting}${order}${search}`;
+
+    const obj = QueryString.parse(url);
+
+    console.log(obj);
+
     return () => {};
-  }, [categoryId, sort, input, page]);
+  }, [categoryId, sort, searchValue, page]);
 
   return (
     <main className={s.main}>

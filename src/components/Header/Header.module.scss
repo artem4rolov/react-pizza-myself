@@ -20,6 +20,10 @@
     gap: 17px;
     cursor: pointer;
 
+    @media (max-width: 650px) {
+      flex-direction: column;
+    }
+
     img {
       width: 38px;
       height: 38px;
@@ -30,6 +34,11 @@
       flex-direction: column;
       justify-content: start;
       text-align: left;
+
+      @media (max-width: 650px) {
+        justify-content: center;
+        align-items: center;
+      }
 
       .logoTitle {
         font-size: 24px;

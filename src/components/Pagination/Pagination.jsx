@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 
 import s from "./Pagination.module.scss";
 import { useDispatch } from "react-redux";
-import { setPage } from "../../redux/slices/pizzaSlice";
+import { setPage } from "../../redux/slices/filterSlice";
 
 const Pagination = () => {
   const dispatch = useDispatch();
@@ -11,6 +11,7 @@ const Pagination = () => {
   const changePage = ({ selected }) => {
     dispatch(setPage(selected));
   };
+
   return (
     <ReactPaginate
       previousLabel={"<"}
