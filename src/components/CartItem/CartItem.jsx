@@ -2,7 +2,7 @@ import React from "react";
 
 import s from "./CartItem.module.scss";
 
-const CartItem = () => {
+const CartItem = ({ pizza }) => {
   return (
     <div className={s.cart__item}>
       <div className={`${s.cart__item_img}`}>
@@ -13,8 +13,10 @@ const CartItem = () => {
         />
       </div>
       <div className={s.cart__item_info}>
-        <h3>Сырный цыпленок</h3>
-        <p>тонкое тесто, 26 см.</p>
+        <h3>{pizza.title}</h3>
+        <p>
+          {pizza.types}, {pizza.sizes} см.
+        </p>
       </div>
       <div className={s.cart__item_count}>
         <div
@@ -37,7 +39,7 @@ const CartItem = () => {
             />
           </svg>
         </div>
-        <b>2</b>
+        <b>{pizza.count}</b>
         <div
           className={`${s.button} ${s.button__outline} ${s.button__circle} ${s.cart__item_count_plus}`}
         >
@@ -60,7 +62,7 @@ const CartItem = () => {
         </div>
       </div>
       <div className={s.cart__item_price}>
-        <b>770 ₽</b>
+        <b>{pizza.price} ₽</b>
       </div>
       <div className={s.cart__item_remove}>
         <div className={`${s.button} ${s.button__outline} ${s.button__circle}`}>

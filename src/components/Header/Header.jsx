@@ -5,9 +5,12 @@ import Logo from "../../assets/logo.svg";
 import Cart from "../../assets/cart.svg";
 import { useNavigate } from "react-router";
 import Search from "../Search/Search";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const navigate = useNavigate();
+
+  const { items, totalPrice } = useSelector((state) => state.cart);
 
   return (
     <header className={s.header}>
@@ -25,7 +28,7 @@ const Header = () => {
         <div className={s.totalPrice}>520 ₽</div>
         <div className={s.totalCount}>
           <img src={Cart} alt="" />
-          <span>3</span>
+          <span>{items ? items.length : 0}</span>
         </div>
       </div>
     </header>
