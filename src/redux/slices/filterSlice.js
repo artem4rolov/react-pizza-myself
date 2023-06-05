@@ -26,9 +26,16 @@ export const filterSlice = createSlice({
     setPage: (state, action) => {
       state.page = action.payload;
     },
+    // берем параметры из url
+    setFiltersFromUrl: (state, action) => {
+      state.categoryId = Number(action.payload.categoryId);
+      state.page = Number(action.payload.page);
+      state.sort = action.payload.sort;
+    },
   },
 });
 
-export const { setCatgeoryId, setSort, setPage } = filterSlice.actions;
+export const { setCatgeoryId, setSort, setPage, setFiltersFromUrl } =
+  filterSlice.actions;
 
 export default filterSlice.reducer;
