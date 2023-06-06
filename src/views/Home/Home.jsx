@@ -12,7 +12,6 @@ import axios from "axios";
 import qs from "qs";
 import { useNavigate } from "react-router";
 import { setFiltersFromUrl } from "../../redux/slices/filterSlice";
-import Header from "../../components/Header/Header";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -95,26 +94,21 @@ const Home = () => {
   }, [categoryId, sort, searchValue, page]);
 
   return (
-    <>
-      <Header />
-      <main className={s.main}>
-        <div className={s.mainNav}>
-          {/* популярность, цена, алфавит */}
-          <Category />
-          {/* сортировка по категориям */}
-          <Sort />
-        </div>
-        {/* pizzas */}
-        <div className={s.mainContent}>
-          {/* список пицц */}
-          {pizzas &&
-            pizzas.map((pizza, index) => (
-              <Pizza key={pizza.id} pizza={pizza} />
-            ))}
-        </div>
-        <Pagination />
-      </main>
-    </>
+    <main className={s.main}>
+      <div className={s.mainNav}>
+        {/* популярность, цена, алфавит */}
+        <Category />
+        {/* сортировка по категориям */}
+        <Sort />
+      </div>
+      {/* pizzas */}
+      <div className={s.mainContent}>
+        {/* список пицц */}
+        {pizzas &&
+          pizzas.map((pizza, index) => <Pizza key={pizza.id} pizza={pizza} />)}
+      </div>
+      <Pagination />
+    </main>
   );
 };
 
