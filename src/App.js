@@ -18,7 +18,6 @@ function App() {
       <div className={s.appWrapper}>
         <div className={s.app}>
           <div className={s.container}>
-            <Header />
             <Routes>
               <Route index path="/" element={<Home />} />
               <Route index path="/cart" element={<Cart />} />

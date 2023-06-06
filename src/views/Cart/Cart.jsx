@@ -5,12 +5,26 @@ import s from "./Cart.module.scss";
 
 import CartImage from "../../assets/cart.svg";
 import CartItem from "../../components/CartItem/CartItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { changeTotalPrice, clearCart } from "../../redux/slices/cartSlice";
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { items } = useSelector((state) => state.cart);
+  const { items, totalPrice } = useSelector((state) => state.cart);
+
+  const totalCountPizzas =
+    items && items.reduce((sum, item) => sum + item.count, 0);
+
+  React.useEffect(() => {
+    if (items && items.length > 0) {
+      dispatch(changeTotalPrice());
+      return;
+    }
+
+    return () => {};
+  }, [items]);
 
   return (
     <div className={s.content}>
@@ -50,7 +64,10 @@ const Cart = () => {
                 </svg>
                 Корзина
               </h2>
-              <div className={s.cart__clear}>
+              <div
+                onClick={() => dispatch(clearCart())}
+                className={s.cart__clear}
+              >
                 <svg
                   width="20"
                   height="20"
@@ -100,11 +117,11 @@ const Cart = () => {
               <div className={s.cart__bottom_details}>
                 <span>
                   {" "}
-                  Всего пицц: <b>{items ? items.length : 0}</b>{" "}
+                  Всего пицц: <b>{items ? totalCountPizzas : 0}</b>{" "}
                 </span>
                 <span>
                   {" "}
-                  Сумма заказа: <b>900 ₽</b>{" "}
+                  Сумма заказа: <b>{totalPrice} ₽</b>{" "}
                 </span>
               </div>
               <div className={s.cart__bottom_buttons}>
@@ -141,9 +158,9 @@ const Cart = () => {
         {/* если корзина пустая */}
         {!items ||
           (items.length === 0 && (
-            <div class={`${s.cart} ${s.cart__empty}`}>
+            <div className={`${s.cart} ${s.cart__empty}`}>
               <h2>
-                Корзина пустая <icon>😕</icon>
+                Корзина пустая <i>😕</i>
               </h2>
               <p>
                 Вероятней всего, вы не заказывали ещё пиццу.
@@ -152,7 +169,7 @@ const Cart = () => {
               </p>
               <img src={CartImage} alt="Empty cart" />
               <div
-                class={`${s.button} ${s.button__black}`}
+                className={`${s.button} ${s.button__black}`}
                 onClick={() => navigate("/")}
               >
                 <span>Вернуться назад</span>

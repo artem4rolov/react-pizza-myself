@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import isEqual from "lodash.isequal";
 
 const initialState = {
   items: [],
@@ -10,7 +9,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    // добавляем пиццу в корзину
+    // добавляем пиццу в корзину, увеличиваем количество пицц
     addItem: (state, action) => {
       const pizza = action.payload;
 
@@ -48,6 +47,38 @@ export const cartSlice = createSlice({
       }
       return;
     },
+    // уменьшить количество пицц
+    minusItem: (state, action) => {
+      const pizza = action.payload;
+
+      // проверяем, есть ли такая пицца уже в корзине или нет
+      const samePizza = state.items.find(
+        (item) =>
+          item.id === pizza.id &&
+          item.sizes === pizza.sizes &&
+          item.types === pizza.types
+      );
+
+      if (samePizza) {
+        const newArr = state.items;
+
+        if (samePizza.count >= 1) {
+          newArr.map((item) => {
+            if (
+              item.id === pizza.id &&
+              item.sizes === pizza.sizes &&
+              item.types === pizza.types
+            ) {
+              item.count -= 1;
+            }
+            return item;
+          });
+
+          state.items = newArr;
+        }
+      }
+    },
+    // удалить пиццу из корзины
     removeItem: (state, action) => {
       const pizza = action.payload;
 
@@ -61,18 +92,31 @@ export const cartSlice = createSlice({
 
       if (samePizza) {
         const newArr = state.items;
-        const index = newArr.findIndex(samePizza);
 
-        if (index) {
-          newArr.slice(1, index);
+        const index = newArr.indexOf(samePizza);
+
+        if (index > -1) {
+          newArr.splice(index, 1);
         }
 
-        return (state.items = newArr);
+        state.items = newArr;
       }
+    },
+    // итоговая стоимость
+    changeTotalPrice: (state, action) => {
+      state.totalPrice = state.items.reduce(
+        (sum, item) => sum + item.price * item.count,
+        0
+      );
+    },
+    // очистить корзину
+    clearCart: (state, action) => {
+      state.items = [];
     },
   },
 });
 
-export const { addItem } = cartSlice.actions;
+export const { addItem, removeItem, minusItem, changeTotalPrice, clearCart } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
