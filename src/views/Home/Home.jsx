@@ -12,12 +12,14 @@ import axios from "axios";
 import qs from "qs";
 import { useNavigate } from "react-router";
 import { setFiltersFromUrl } from "../../redux/slices/filterSlice";
+import Skeleton from "./../../components/Skeleton/Skeleton";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { categoryId, sort, page } = useSelector((state) => state.filter);
   const [pizzas, setPizzas] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
 
   const isMounted = React.useRef(false);
   const isSearchUrlValue = React.useRef(false);
@@ -26,6 +28,7 @@ const Home = () => {
   const { searchValue } = React.useContext(SearchContext);
 
   const fetchPizzas = () => {
+    setLoading(true);
     const category =
       categoryId && !searchValue ? `&category=${categoryId}` : "";
     const sorting = `&sortBy=${sort.key}`;
@@ -39,7 +42,10 @@ const Home = () => {
             page + 1
           }&limit=4${category}${sorting}${order}${search}`
         )
-        .then((res) => setPizzas(res.data));
+        .then((res) => {
+          setPizzas(res.data);
+          setLoading(false);
+        });
     } catch (err) {
       console.log(err);
     }
@@ -104,7 +110,10 @@ const Home = () => {
       {/* pizzas */}
       <div className={s.mainContent}>
         {/* список пицц */}
+        {loading &&
+          Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} />)}
         {pizzas &&
+          !loading &&
           pizzas.map((pizza, index) => <Pizza key={pizza.id} pizza={pizza} />)}
       </div>
       <Pagination />
