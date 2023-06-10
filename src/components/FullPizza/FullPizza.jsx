@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCurrentPizza } from "../../redux/slices/pizzaSlice";
+import { fetchCurrentPizza, fetchPizzas } from "../../redux/slices/pizzaSlice";
 import { useNavigate, useParams } from "react-router";
 
 import s from "./FullPizza.module.scss";
@@ -11,6 +11,8 @@ const FullPizza = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { currentPizza, status } = useSelector((state) => state.pizzas);
+  const { categoryId, sort, page } = useSelector((state) => state.filter);
+  const { searchValue } = useSelector((state) => state.search);
   const { id } = useParams();
 
   React.useEffect(() => {
@@ -20,7 +22,7 @@ const FullPizza = () => {
   //   console.log(currentPizza);
 
   return (
-    <div className={s.currentPizza}>
+    <div className={s.currentPizza} key={currentPizza && currentPizza.id}>
       {currentPizza && status === "success" ? (
         <>
           <img src={currentPizza[0].imageUrl} alt="" />
@@ -41,7 +43,9 @@ const FullPizza = () => {
             <div>
               <label>Доступные варианты: </label>
               {currentPizza[0].sizes.map((size, index) => (
-                <span className={s.currentPizzaPrice}>{size} см |</span>
+                <span key={index} className={s.currentPizzaPrice}>
+                  {size} см |
+                </span>
               ))}
             </div>
 
