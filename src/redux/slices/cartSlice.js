@@ -112,6 +112,7 @@ export const cartSlice = createSlice({
     // очистить корзину
     clearCart: (state, action) => {
       state.items = [];
+      state.totalPrice = 0;
     },
   },
 });
