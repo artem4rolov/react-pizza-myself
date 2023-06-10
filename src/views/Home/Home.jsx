@@ -1,31 +1,28 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import qs from "qs";
 
 import Sort, { sortValue } from "../../components/Sort/Sort";
 import Pizza from "../../components/Pizza/Pizza";
 import Category from "../../components/Category/Category";
 import Pagination from "../../components/Pagination/Pagination";
-import { SearchContext } from "../../App";
+import Skeleton from "./../../components/Skeleton/Skeleton";
+
+import { setFiltersFromUrl } from "../../redux/slices/filterSlice";
+import { fetchPizzas } from "../../redux/slices/pizzaSlice";
 
 import s from "./Home.module.scss";
-import axios from "axios";
-import qs from "qs";
-import { useNavigate } from "react-router";
-import { setFiltersFromUrl } from "../../redux/slices/filterSlice";
-import Skeleton from "./../../components/Skeleton/Skeleton";
-import { fetchPizzas } from "../../redux/slices/pizzaSlice";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { categoryId, sort, page } = useSelector((state) => state.filter);
   const { pizzas, status } = useSelector((state) => state.pizzas);
+  const { searchValue } = useSelector((state) => state.search);
 
   const isMounted = React.useRef(false);
   const isSearchUrlValue = React.useRef(false);
-
-  // значение поля поиска из контекста (App.js)
-  const { searchValue } = React.useContext(SearchContext);
 
   const getPizzas = () => {
     const category =
@@ -78,8 +75,6 @@ const Home = () => {
   React.useEffect(() => {
     getPizzas();
   }, [categoryId, sort, searchValue, page]);
-
-  console.log(pizzas);
 
   return (
     <main className={s.main}>

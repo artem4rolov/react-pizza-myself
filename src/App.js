@@ -6,28 +6,32 @@ import Error from "./views/Error/Error";
 import Header from "./components/Header/Header";
 
 import s from "./App.module.scss";
-
-export const SearchContext = React.createContext("");
+import FullPizza from "./components/FullPizza/FullPizza";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 function App() {
-  // для временного решения с контекстом
-  const [searchValue, setSearchValue] = React.useState("");
-
   return (
-    <SearchContext.Provider value={{ searchValue, setSearchValue }}>
-      <div className={s.appWrapper}>
-        <div className={s.app}>
-          <div className={s.container}>
-            <Header />
-            <Routes>
-              <Route index path="/" element={<Home />} />
-              <Route index path="/cart" element={<Cart />} />
-              <Route index path="/*" element={<Error />} />
-            </Routes>
-          </div>
+    <div className={s.appWrapper}>
+      <div className={s.app}>
+        <div className={s.container}>
+          <Header />
+          <Routes>
+            <Route index path="/" element={<Home />} />
+            <Route index path="/cart" element={<Cart />} />
+            <Route
+              index
+              path="/:id"
+              element={
+                <ErrorBoundary fallback={<p>Что-то пошло не так</p>}>
+                  <FullPizza />
+                </ErrorBoundary>
+              }
+            />
+            <Route index path="/*" element={<Error />} />
+          </Routes>
         </div>
       </div>
-    </SearchContext.Provider>
+    </div>
   );
 }
 

@@ -1,11 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+
+import { addItem } from "../../redux/slices/cartSlice";
 
 import s from "./Pizza.module.scss";
-import { useDispatch } from "react-redux";
-import { addItem } from "../../redux/slices/cartSlice";
+import { useNavigate } from "react-router";
 
 const Pizza = ({ pizza }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [activeDough, setActiveDough] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
@@ -39,7 +42,7 @@ const Pizza = ({ pizza }) => {
   };
 
   return (
-    <div className={s.pizzaBlock}>
+    <div className={s.pizzaBlock} onClick={() => navigate(`/${pizza.id}`)}>
       {/* image пиццы */}
       <img src={pizza.imageUrl} alt="pizza bg" />
       <span className={s.pizzaTitle}>{pizza.title}</span>

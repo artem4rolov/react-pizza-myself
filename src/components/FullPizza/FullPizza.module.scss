@@ -1,0 +1,64 @@
+.currentPizza {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 20px;
+
+  div {
+    @media (max-width: 650px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+    }
+  }
+
+  @media (max-width: 650px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  img {
+    width: 200px;
+    height: 200px;
+  }
+
+  span {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  label {
+    font-size: 20px;
+  }
+}
+
+.currentPizzaPrice {
+  color: #fe5f1e;
+}
+
+.addCurrentPizza {
+  padding: 10px;
+  border-radius: 50px;
+  color: white;
+  background: #fe5f1e;
+  width: 170px;
+  text-align: center;
+}
+
+.goBack {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 50px;
+  color: white;
+  background: black;
+  width: 170px;
+  text-align: center;
+}

@@ -1,20 +1,21 @@
 import React from "react";
+import debounce from "lodash.debounce";
+import { useDispatch } from "react-redux";
+
+import { setSearchValue } from "../../redux/slices/searchSlice";
 
 import SearchIcon from "../../assets/search.svg";
 import CloseIcon from "../../assets/close.svg";
 import s from "./Search.module.scss";
-import { SearchContext } from "../../App";
-import debounce from "lodash.debounce";
 
 const Search = () => {
-  // стейт для поиска пицц (запрос на mockApi) с debounce (задержка)
-  const { setSearchValue } = React.useContext(SearchContext);
+  const dispatch = useDispatch();
   // стейт для input, локальный
   const [value, setValue] = React.useState("");
   const inputRef = React.useRef();
 
   const handleRemove = () => {
-    setSearchValue("");
+    dispatch(setSearchValue(""));
     setValue("");
     inputRef.current.focus();
   };
@@ -23,7 +24,7 @@ const Search = () => {
   // с помощью useCallback не даем пересоздаваться функции updateSearchValue каждый раз при ререндере компонента
   const updateSearchValue = React.useCallback(
     debounce((str) => {
-      setSearchValue(str);
+      dispatch(setSearchValue(str));
     }, 500),
     []
   );

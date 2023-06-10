@@ -1,9 +1,10 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
+import { useDispatch } from "react-redux";
+
+import { setPage } from "../../redux/slices/filterSlice";
 
 import s from "./Pagination.module.scss";
-import { useDispatch } from "react-redux";
-import { setPage } from "../../redux/slices/filterSlice";
 
 const Pagination = () => {
   const dispatch = useDispatch();

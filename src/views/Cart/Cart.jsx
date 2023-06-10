@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+
+import { changeTotalPrice, clearCart } from "../../redux/slices/cartSlice";
 
 import s from "./Cart.module.scss";
-
 import CartImage from "../../assets/cart.svg";
 import CartItem from "../../components/CartItem/CartItem";
-import { useDispatch, useSelector } from "react-redux";
-import { changeTotalPrice, clearCart } from "../../redux/slices/cartSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();

@@ -1,13 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {};
+const initialState = {
+  searchValue: "", // значение поиска пицц
+};
 
 export const searchSlice = createSlice({
   name: "search",
   initialState,
-  reducers: {},
+  reducers: {
+    setSearchValue: (state, action) => {
+      state.searchValue = action.payload;
+    },
+  },
 });
 
-export const {} = searchSlice.actions;
+export const { setSearchValue } = searchSlice.actions;
 
 export default searchSlice.reducer;

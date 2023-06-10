@@ -1,12 +1,14 @@
 import React from "react";
-import s from "./Header.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
+import Search from "../Search/Search";
+
+import { changeTotalPrice } from "../../redux/slices/cartSlice";
+
+import s from "./Header.module.scss";
 import Logo from "../../assets/logo.svg";
 import Cart from "../../assets/cart.svg";
-import { useNavigate } from "react-router";
-import Search from "../Search/Search";
-import { useDispatch, useSelector } from "react-redux";
-import { changeTotalPrice } from "../../redux/slices/cartSlice";
 
 const Header = () => {
   const navigate = useNavigate();
