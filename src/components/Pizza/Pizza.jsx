@@ -1,17 +1,20 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 import { addItem } from "../../redux/slices/cartSlice";
 
 import s from "./Pizza.module.scss";
-import { useNavigate } from "react-router";
 
 const Pizza = ({ pizza }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { items } = useSelector((state) => state.cart);
+
   const [activeDough, setActiveDough] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
+  const [count, setCount] = React.useState(0);
 
   const dough = ["тонкое", "традиционное"];
 
@@ -32,6 +35,26 @@ const Pizza = ({ pizza }) => {
     }
   };
 
+  // количество пицц одного вида (но разных размеров и теста)
+  const checkCount = () => {
+    let number = 0;
+
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].id === pizza.id) {
+        number = items[i].count;
+      }
+    }
+
+    setCount(number);
+    return;
+  };
+
+  React.useEffect(() => {
+    checkCount();
+
+    return () => {};
+  }, [items]);
+
   // готовый объект для корзины
   const cartItem = {
     ...pizza,
@@ -42,9 +65,13 @@ const Pizza = ({ pizza }) => {
   };
 
   return (
-    <div className={s.pizzaBlock} onClick={() => navigate(`/${pizza.id}`)}>
+    <div className={s.pizzaBlock}>
       {/* image пиццы */}
-      <img src={pizza.imageUrl} alt="pizza bg" />
+      <img
+        onClick={() => navigate(`/${pizza.id}`)}
+        src={pizza.imageUrl}
+        alt="pizza bg"
+      />
       <span className={s.pizzaTitle}>{pizza.title}</span>
       <div className={s.pizzaMenu}>
         {/* меню выбора теста */}
@@ -80,6 +107,7 @@ const Pizza = ({ pizza }) => {
           onClick={() => dispatch(addItem(cartItem))}
         >
           + Добавить
+          {<span>{count}</span>}
         </button>
       </div>
     </div>

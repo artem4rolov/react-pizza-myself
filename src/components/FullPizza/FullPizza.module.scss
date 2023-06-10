@@ -61,4 +61,10 @@
   background: black;
   width: 170px;
   text-align: center;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
 }
