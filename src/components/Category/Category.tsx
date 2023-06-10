@@ -14,7 +14,15 @@ export const categories = [
   "Закрытые",
 ];
 
-const Category = ({ activeCategory, setActiveCategory }) => {
+type CategoryProps = {
+  activeCategory: number;
+  setActiveCategory: any;
+};
+
+const Category: React.FC<CategoryProps> = ({
+  activeCategory,
+  setActiveCategory,
+}) => {
   const dispatch = useDispatch();
   const { categoryId } = useSelector((state) => state.filter);
 

@@ -1,12 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 
 import { addItem, minusItem, removeItem } from "../../redux/slices/cartSlice";
 
 import s from "./CartItem.module.scss";
+import { PizzaType } from "../@types/pizza";
 
-const CartItem = ({ pizza }) => {
+const CartItem: React.FC<PizzaType> = (pizza) => {
   const dispatch = useDispatch();
+
+  const { types, sizes, price, title, imageUrl, count } = pizza;
 
   React.useEffect(() => {
     if (pizza.count === 0) {
@@ -19,16 +22,12 @@ const CartItem = ({ pizza }) => {
   return (
     <div className={s.cart__item}>
       <div className={`${s.cart__item_img}`}>
-        <img
-          className="pizza-block__image"
-          src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-          alt="Pizza"
-        />
+        <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
       </div>
       <div className={s.cart__item_info}>
-        <h3>{pizza.title}</h3>
+        <h3>{title}</h3>
         <p>
-          {pizza.types}, {pizza.sizes} см.
+          {types}, {sizes} см.
         </p>
       </div>
       <div className={s.cart__item_count}>
@@ -53,7 +52,7 @@ const CartItem = ({ pizza }) => {
             />
           </svg>
         </div>
-        <b>{pizza.count}</b>
+        <b>{count}</b>
         <div
           className={`${s.button} ${s.button__outline} ${s.button__circle} ${s.cart__item_count_plus}`}
           onClick={() => dispatch(addItem(pizza))}
@@ -77,7 +76,7 @@ const CartItem = ({ pizza }) => {
         </div>
       </div>
       <div className={s.cart__item_price}>
-        <b>{pizza.price} ₽</b>
+        <b>{price} ₽</b>
       </div>
       <div
         className={s.cart__item_remove}

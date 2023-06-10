@@ -12,12 +12,12 @@ const Search = () => {
   const dispatch = useDispatch();
   // стейт для input, локальный
   const [value, setValue] = React.useState("");
-  const inputRef = React.useRef();
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   const handleRemove = () => {
     dispatch(setSearchValue(""));
     setValue("");
-    inputRef.current.focus();
+    inputRef.current?.focus();
   };
 
   // запрос на mockApi, с задержкой поиска (ждем заполнение инпута 500 мс)
@@ -30,7 +30,7 @@ const Search = () => {
   );
 
   // меняем локальный стейт для инпута
-  const onChangeInput = (str) => {
+  const onChangeInput = (str: string) => {
     setValue(str);
     updateSearchValue(str);
   };

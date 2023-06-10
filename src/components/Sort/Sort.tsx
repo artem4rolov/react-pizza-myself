@@ -16,15 +16,15 @@ export const sortValue = [
   { value: "по цене (по убыванию)", key: "price", order: "desc" },
 ];
 
-const Sort = () => {
+const Sort: React.FC = () => {
   const dispatch = useDispatch();
   const { sort } = useSelector((state) => state.filter);
-  const sortRef = React.useRef();
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = React.useState(false);
   const [activeSort, setActiveSort] = React.useState(0);
 
-  const clickOutside = (e) => {
+  const clickOutside = (e: React.MouseEvent) => {
     if (sortRef.current && !sortRef.current.contains(e.target)) {
       setOpen(false);
     }

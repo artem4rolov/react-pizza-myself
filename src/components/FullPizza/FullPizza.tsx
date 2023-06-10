@@ -7,12 +7,10 @@ import s from "./FullPizza.module.scss";
 import { categories } from "../Category/Category";
 import ContentLoader from "react-content-loader";
 
-const FullPizza = () => {
+const FullPizza: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { currentPizza, status } = useSelector((state) => state.pizzas);
-  const { categoryId, sort, page } = useSelector((state) => state.filter);
-  const { searchValue } = useSelector((state) => state.search);
   const { id } = useParams();
 
   React.useEffect(() => {
@@ -42,7 +40,7 @@ const FullPizza = () => {
             </div>
             <div>
               <label>Доступные варианты: </label>
-              {currentPizza[0].sizes.map((size, index) => (
+              {currentPizza[0].sizes.map((size: number, index: number) => (
                 <span key={index} className={s.currentPizzaPrice}>
                   {size} см |
                 </span>

@@ -10,14 +10,14 @@ import s from "./Header.module.scss";
 import Logo from "../../assets/logo.svg";
 import Cart from "../../assets/cart.svg";
 
-const Header = () => {
+const Header: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { items, totalPrice } = useSelector((state) => state.cart);
 
   const totalCountPizzas =
-    items && items.reduce((sum, item) => sum + item.count, 0);
+    items && items.reduce((sum: number, item: any) => sum + item.count, 0);
 
   React.useEffect(() => {
     if (items && items.length > 0) {
@@ -34,7 +34,7 @@ const Header = () => {
       <div className={s.headerLogo} onClick={() => navigate("/")}>
         <img src={Logo} alt="" />
         <div className={s.logoText}>
-          <span className={s.logoTitle}>PIZZA</span>
+          <span className={s.logoTitle}>YoYoPIZZA</span>
           <span className={s.logoSubTitle}>лучшая пицца</span>
         </div>
       </div>

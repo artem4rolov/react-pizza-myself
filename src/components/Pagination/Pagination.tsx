@@ -6,11 +6,11 @@ import { setPage } from "../../redux/slices/filterSlice";
 
 import s from "./Pagination.module.scss";
 
-const Pagination = () => {
+const Pagination: React.FC = () => {
   const dispatch = useDispatch();
-  const { page } = useSelector((state) => state.filter);
+  const { page } = useSelector((state: any) => state.filter);
 
-  const changePage = ({ selected }) => {
+  const changePage = (selected) => {
     dispatch(setPage(selected));
   };
 

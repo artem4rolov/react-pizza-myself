@@ -6,12 +6,12 @@ declare module "*.scss" {
 
 // declaration.d.ts
 declare module "*.png" {
-  const content: Record<string, string>;
-  export default content;
+  const value: any;
+  export default value;
 }
 
 // declaration.d.ts
 declare module "*.svg" {
-  const content: Record<string, string>;
-  export default content;
+  const value: any;
+  export default value;
 }

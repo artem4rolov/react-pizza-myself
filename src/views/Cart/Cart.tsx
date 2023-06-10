@@ -1,21 +1,22 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
+import CartItem from "../../components/CartItem/CartItem";
 import { changeTotalPrice, clearCart } from "../../redux/slices/cartSlice";
 
 import s from "./Cart.module.scss";
 import CartImage from "../../assets/cart.svg";
-import CartItem from "../../components/CartItem/CartItem";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useLocation();
 
   const { items, totalPrice } = useSelector((state) => state.cart);
 
   const totalCountPizzas =
-    items && items.reduce((sum, item) => sum + item.count, 0);
+    items && items.reduce((sum: number, item: any) => sum + item.count, 0);
 
   React.useEffect(() => {
     if (items && items.length > 0) {
@@ -25,6 +26,8 @@ const Cart = () => {
 
     return () => {};
   }, [items]);
+
+  console.log(params);
 
   return (
     <div className={s.content}>
