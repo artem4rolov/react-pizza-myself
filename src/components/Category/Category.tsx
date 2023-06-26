@@ -1,9 +1,10 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { setCatgeoryId } from "../../redux/slices/filterSlice";
 
 import s from "./Category.module.scss";
+import { useAppSelector } from "../../redux/store";
 
 export const categories = [
   "Все",
@@ -14,17 +15,9 @@ export const categories = [
   "Закрытые",
 ];
 
-type CategoryProps = {
-  activeCategory: number;
-  setActiveCategory: any;
-};
-
-const Category: React.FC<CategoryProps> = ({
-  activeCategory,
-  setActiveCategory,
-}) => {
+const Category = () => {
   const dispatch = useDispatch();
-  const { categoryId } = useSelector((state) => state.filter);
+  const { categoryId } = useAppSelector((state) => state.filter);
 
   return (
     <nav className={s.nav}>

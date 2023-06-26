@@ -1,4 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { SortValueType } from "../../components/Sort/Sort";
+
+type FilterTypeSlice = {
+  categoryId: number;
+  sort: SortValueType;
+  page: number;
+};
 
 const initialState = {
   categoryId: 0,
@@ -15,19 +22,19 @@ export const filterSlice = createSlice({
   initialState,
   reducers: {
     // категория пиццы
-    setCatgeoryId: (state, action) => {
+    setCatgeoryId: (state, action: PayloadAction<number>) => {
       state.categoryId = action.payload;
     },
     // фильтр сортировки
-    setSort: (state, action) => {
+    setSort: (state, action: PayloadAction<SortValueType>) => {
       state.sort = action.payload;
     },
     // пагинация
-    setPage: (state, action) => {
+    setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
     // берем параметры из url
-    setFiltersFromUrl: (state, action) => {
+    setFiltersFromUrl: (state, action: PayloadAction<FilterTypeSlice>) => {
       state.categoryId = Number(action.payload.categoryId);
       state.page = Number(action.payload.page);
       state.sort = action.payload.sort;

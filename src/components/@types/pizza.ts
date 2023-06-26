@@ -19,5 +19,5 @@ export type CartItem = {
   rating: number;
   title: string;
   imageUrl: string;
-  count?: number;
+  count: number;
 };

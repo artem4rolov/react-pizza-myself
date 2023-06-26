@@ -1,17 +1,18 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
-import { useDispatch, useSelector } from "react-redux";
 
 import { setPage } from "../../redux/slices/filterSlice";
 
 import s from "./Pagination.module.scss";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 
-const Pagination: React.FC = () => {
-  const dispatch = useDispatch();
-  const { page } = useSelector((state: any) => state.filter);
+const Pagination = () => {
+  const dispatch = useAppDispatch();
+  const { page } = useAppSelector((state) => state.filter);
 
+  // @ts-ignore
   const changePage = (selected) => {
-    dispatch(setPage(selected));
+    dispatch(setPage(selected.selected));
   };
 
   return (

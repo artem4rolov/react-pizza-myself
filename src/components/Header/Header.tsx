@@ -9,15 +9,16 @@ import { changeTotalPrice } from "../../redux/slices/cartSlice";
 import s from "./Header.module.scss";
 import Logo from "../../assets/logo.svg";
 import Cart from "../../assets/cart.svg";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { items, totalPrice } = useSelector((state) => state.cart);
+  const { items, totalPrice } = useAppSelector((state) => state.cart);
 
   const totalCountPizzas =
-    items && items.reduce((sum: number, item: any) => sum + item.count, 0);
+    items && items.reduce((sum, item) => sum + item.count, 0);
 
   React.useEffect(() => {
     if (items && items.length > 0) {

@@ -1,15 +1,15 @@
 import React from "react";
 import debounce from "lodash.debounce";
-import { useDispatch } from "react-redux";
 
 import { setSearchValue } from "../../redux/slices/searchSlice";
 
 import SearchIcon from "../../assets/search.svg";
 import CloseIcon from "../../assets/close.svg";
 import s from "./Search.module.scss";
+import { useAppDispatch } from "../../redux/store";
 
 const Search = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   // стейт для input, локальный
   const [value, setValue] = React.useState("");
   const inputRef = React.useRef<HTMLInputElement>(null);

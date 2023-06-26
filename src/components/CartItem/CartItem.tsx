@@ -1,13 +1,18 @@
 import React, { FC } from "react";
-import { useDispatch } from "react-redux";
 
 import { addItem, minusItem, removeItem } from "../../redux/slices/cartSlice";
 
 import s from "./CartItem.module.scss";
-import { PizzaType } from "../@types/pizza";
+import { CartItem } from "../@types/pizza";
+import { useAppDispatch } from "../../redux/store";
 
-const CartItem: React.FC<PizzaType> = (pizza) => {
-  const dispatch = useDispatch();
+type CartItemProps = {
+  pizza: CartItem;
+  key: number;
+};
+
+const CartItemPizza: React.FC<CartItemProps> = ({ pizza }) => {
+  const dispatch = useAppDispatch();
 
   const { types, sizes, price, title, imageUrl, count } = pizza;
 
@@ -105,4 +110,4 @@ const CartItem: React.FC<PizzaType> = (pizza) => {
   );
 };
 
-export default CartItem;
+export default CartItemPizza;

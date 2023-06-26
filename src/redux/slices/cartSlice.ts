@@ -1,6 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { CartItem, PizzaType } from "../../components/@types/pizza";
 
-const initialState = {
+type ItemCartSlice = {
+  items: CartItem[];
+  totalPrice: number;
+};
+
+const initialState: ItemCartSlice = {
   items: [],
   totalPrice: 0,
 };
@@ -10,7 +16,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     // добавляем пиццу в корзину, увеличиваем количество пицц
-    addItem: (state, action) => {
+    addItem: (state, action: PayloadAction<CartItem>) => {
       const pizza = action.payload;
 
       // если такая пицца уже есть в корзине
@@ -48,7 +54,7 @@ export const cartSlice = createSlice({
       return;
     },
     // уменьшить количество пицц
-    minusItem: (state, action) => {
+    minusItem: (state, action: PayloadAction<CartItem>) => {
       const pizza = action.payload;
 
       // проверяем, есть ли такая пицца уже в корзине или нет
@@ -62,14 +68,14 @@ export const cartSlice = createSlice({
       if (samePizza) {
         const newArr = state.items;
 
-        if (samePizza.count >= 1) {
+        if (samePizza.count && samePizza.count >= 1) {
           newArr.map((item) => {
             if (
               item.id === pizza.id &&
               item.sizes === pizza.sizes &&
               item.types === pizza.types
             ) {
-              item.count -= 1;
+              item.count--;
             }
             return item;
           });
@@ -79,7 +85,7 @@ export const cartSlice = createSlice({
       }
     },
     // удалить пиццу из корзины
-    removeItem: (state, action) => {
+    removeItem: (state, action: PayloadAction<CartItem>) => {
       const pizza = action.payload;
 
       // проверяем, есть ли такая пицца уже в корзине или нет
@@ -103,14 +109,14 @@ export const cartSlice = createSlice({
       }
     },
     // итоговая стоимость
-    changeTotalPrice: (state, action) => {
+    changeTotalPrice: (state) => {
       state.totalPrice = state.items.reduce(
         (sum, item) => sum + item.price * item.count,
         0
       );
     },
     // очистить корзину
-    clearCart: (state, action) => {
+    clearCart: (state) => {
       state.items = [];
       state.totalPrice = 0;
     },

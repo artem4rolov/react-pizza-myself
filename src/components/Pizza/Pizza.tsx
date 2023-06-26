@@ -6,17 +6,22 @@ import { addItem } from "../../redux/slices/cartSlice";
 
 import s from "./Pizza.module.scss";
 import { CartItem, PizzaType } from "../@types/pizza";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 
 const dough = ["тонкое", "традиционное"];
 
-const Pizza: React.FC<PizzaType> = (pizza) => {
-  const dispatch = useDispatch();
+type PizzaProps = {
+  pizza: PizzaType;
+};
+
+const Pizza: React.FC<PizzaProps> = ({ pizza }) => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { items } = useSelector((state: any) => state.cart);
-  const [activeDough, setActiveDough] = React.useState<number>(0);
-  const [activeSize, setActiveSize] = React.useState<number>(0);
+  const { items } = useAppSelector((state) => state.cart);
+  const [activeDough, setActiveDough] = React.useState(0);
+  const [activeSize, setActiveSize] = React.useState(0);
   // счетчик пицц в корзине конкрентного типа
-  const [count, setCount] = React.useState<number>(0);
+  const [count, setCount] = React.useState(0);
   // объект пиццы в корзину
   const [pizzaCart, setPizzaCart] = React.useState<CartItem | undefined>();
 
@@ -58,15 +63,17 @@ const Pizza: React.FC<PizzaType> = (pizza) => {
 
   // готовый объект для корзины
   React.useEffect(() => {
-    const cartItem: CartItem = {
-      ...pizza,
-      types: dough[activeDough],
-      sizes: String(pizza.sizes[activeSize]),
-      count: 1,
-      price: pizzaPrice(pizza.price),
-    };
+    if (pizza) {
+      const cartItem: CartItem = {
+        ...pizza,
+        types: dough[activeDough],
+        sizes: String(pizza.sizes[activeSize]),
+        count: 1,
+        price: pizzaPrice(pizza.price),
+      };
 
-    setPizzaCart(cartItem);
+      setPizzaCart(cartItem);
+    }
   }, [pizza]);
 
   return (

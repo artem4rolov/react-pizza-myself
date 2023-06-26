@@ -1,13 +1,19 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import { setSort } from "../../redux/slices/filterSlice";
 
 import s from "./Sort.module.scss";
 import ArrowUp from "../../assets/arrowUp.svg";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+
+export type SortValueType = {
+  value: string;
+  key: string;
+  order: string;
+};
 
 // пункты фильтрации
-export const sortValue = [
+export const sortValue: SortValueType[] = [
   { value: "популярности (по возрастанию)", key: "rating", order: "asc" },
   { value: "популярности (по убыванию)", key: "rating", order: "desc" },
   { value: "по алфавиту (по возрастанию)", key: "title", order: "asc" },
@@ -17,23 +23,25 @@ export const sortValue = [
 ];
 
 const Sort: React.FC = () => {
-  const dispatch = useDispatch();
-  const { sort } = useSelector((state) => state.filter);
+  const dispatch = useAppDispatch();
+  const { sort } = useAppSelector((state) => state.filter);
   const sortRef = React.useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = React.useState(false);
   const [activeSort, setActiveSort] = React.useState(0);
 
-  const clickOutside = (e: React.MouseEvent) => {
-    if (sortRef.current && !sortRef.current.contains(e.target)) {
+  const clickOutside = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (sortRef.current && !sortRef.current.contains(e.target as Node)) {
       setOpen(false);
     }
   };
 
   React.useEffect(() => {
+    // @ts-ignore
     document.body.addEventListener("click", clickOutside);
 
     return () => {
+      // @ts-ignore
       document.body.removeEventListener("click", clickOutside);
     };
   }, []);

@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import qs from "qs";
 
@@ -7,22 +6,25 @@ import Sort, { sortValue } from "../../components/Sort/Sort";
 import Pizza from "../../components/Pizza/Pizza";
 import Category from "../../components/Category/Category";
 import Pagination from "../../components/Pagination/Pagination";
-import Skeleton from "./../../components/Skeleton/Skeleton";
+import Skeleton from "../../components/Skeleton/Skeleton";
 
 import { setFiltersFromUrl } from "../../redux/slices/filterSlice";
 import { fetchPizzas } from "../../redux/slices/pizzaSlice";
 
 import s from "./Home.module.scss";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 
 const Home = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { categoryId, sort, page } = useSelector((state) => state.filter);
-  const { pizzas, status } = useSelector((state) => state.pizzas);
-  const { searchValue } = useSelector((state) => state.search);
+  const dispatch = useAppDispatch();
+  const { categoryId, sort, page } = useAppSelector((state) => state.filter);
+  const { pizzas, status } = useAppSelector((state) => state.pizzas);
+  const { searchValue } = useAppSelector((state) => state.search);
 
   const isMounted = React.useRef(false);
   const isSearchUrlValue = React.useRef(false);
+
+  console.log(page);
 
   const getPizzas = () => {
     const category =
@@ -41,8 +43,8 @@ const Home = () => {
 
       dispatch(
         setFiltersFromUrl({
-          categoryId: params.category,
-          page: params.page,
+          categoryId: Number(params.category),
+          page: Number(params.page),
           sort: {
             ...sortValue.filter(
               (item) =>
@@ -60,7 +62,7 @@ const Home = () => {
   React.useEffect(() => {
     if (isMounted.current) {
       const obj = qs.stringify({
-        page,
+        page: Number(page),
         category: categoryId,
         sortBy: sort.key,
         order: sort.order,
@@ -90,7 +92,7 @@ const Home = () => {
         {status === "loading" &&
           Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} />)}
         {pizzas &&
-          pizzas.map((pizza, index) => <Pizza key={pizza.id} pizza={pizza} />)}
+          pizzas.map((pizza) => <Pizza key={pizza.id} pizza={pizza} />)}
       </div>
       <Pagination />
     </main>

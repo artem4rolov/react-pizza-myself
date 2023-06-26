@@ -6,21 +6,24 @@ import { useNavigate, useParams } from "react-router";
 import s from "./FullPizza.module.scss";
 import { categories } from "../Category/Category";
 import ContentLoader from "react-content-loader";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 
 const FullPizza: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { currentPizza, status } = useSelector((state) => state.pizzas);
+  const dispatch = useAppDispatch();
+  const { currentPizza, status } = useAppSelector((state) => state.pizzas);
   const { id } = useParams();
 
   React.useEffect(() => {
-    dispatch(fetchCurrentPizza(id));
+    if (id) {
+      dispatch(fetchCurrentPizza(id));
+    }
   }, []);
 
   //   console.log(currentPizza);
 
   return (
-    <div className={s.currentPizza} key={currentPizza && currentPizza.id}>
+    <div className={s.currentPizza} key={currentPizza && currentPizza[0].id}>
       {currentPizza && status === "success" ? (
         <>
           <img src={currentPizza[0].imageUrl} alt="" />
