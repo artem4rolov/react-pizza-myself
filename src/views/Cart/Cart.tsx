@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 import CartItem from "../../components/CartItem/CartItem";
 import { changeTotalPrice, clearCart } from "../../redux/slices/cartSlice";
@@ -11,7 +11,6 @@ import { useAppDispatch, useAppSelector } from "../../redux/store";
 const Cart = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const params = useLocation();
 
   const { items, totalPrice } = useAppSelector((state) => state.cart);
 
@@ -26,8 +25,6 @@ const Cart = () => {
 
     return () => {};
   }, [items]);
-
-  console.log(params);
 
   return (
     <div className={s.content}>

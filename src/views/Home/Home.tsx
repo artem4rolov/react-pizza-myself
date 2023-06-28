@@ -24,8 +24,6 @@ const Home = () => {
   const isMounted = React.useRef(false);
   const isSearchUrlValue = React.useRef(false);
 
-  console.log(page);
-
   const getPizzas = () => {
     const category =
       categoryId && !searchValue ? `&category=${categoryId}` : "";
