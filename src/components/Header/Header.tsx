@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 import Search from "../Search/Search";
 
@@ -14,6 +14,10 @@ import { useAppDispatch, useAppSelector } from "../../redux/store";
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  let location = useLocation();
+
+  console.log();
 
   const { items, totalPrice } = useAppSelector((state) => state.cart);
 
@@ -39,15 +43,18 @@ const Header: React.FC = () => {
           <span className={s.logoSubTitle}>лучшая пицца</span>
         </div>
       </div>
-      <Search />
-      {/* button cart */}
-      <div className={s.headerButton} onClick={() => navigate("/cart")}>
-        <div className={s.totalPrice}>{totalPrice} ₽</div>
-        <div className={s.totalCount}>
-          <img src={Cart} alt="" />
-          <span>{items && items.length > 0 ? totalCountPizzas : 0}</span>
+      {/* поиск */}
+      {location.pathname !== "/cart" && <Search />}
+      {/* кнопка корзины с суммой заказа и количеством пицц */}
+      {location.pathname !== "/cart" && (
+        <div className={s.headerButton} onClick={() => navigate("/cart")}>
+          <div className={s.totalPrice}>{totalPrice} ₽</div>
+          <div className={s.totalCount}>
+            <img src={Cart} alt="" />
+            <span>{items && items.length > 0 ? totalCountPizzas : 0}</span>
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 };
