@@ -66,7 +66,13 @@ const Pizza: React.FC<PizzaProps> = ({ pizza }) => {
     if (pizza) {
       const cartItem: CartItem = {
         ...pizza,
-        types: dough[activeDough],
+        types: types.map((type, index) => {
+          if (type === activeDough) {
+            return dough[type];
+          } else {
+            return dough[activeDough];
+          }
+        })[0],
         sizes: String(pizza.sizes[activeSize]),
         count: 1,
         price: pizzaPrice(pizza.price),
@@ -74,7 +80,7 @@ const Pizza: React.FC<PizzaProps> = ({ pizza }) => {
 
       setPizzaCart(cartItem);
     }
-  }, [pizza]);
+  }, [pizza, activeDough, activeSize]);
 
   return (
     <div className={s.pizzaBlock}>
