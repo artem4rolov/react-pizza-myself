@@ -22,7 +22,7 @@ export const sortValue: SortValueType[] = [
   { value: "по цене (по убыванию)", key: "price", order: "desc" },
 ];
 
-const Sort: React.FC = () => {
+export const Sort: React.FC = () => {
   const dispatch = useAppDispatch();
   const { sort } = useAppSelector((state) => state.filter);
   const sortRef = React.useRef<HTMLDivElement>(null);
@@ -72,5 +72,3 @@ const Sort: React.FC = () => {
     </div>
   );
 };
-
-export default Sort;

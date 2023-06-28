@@ -6,7 +6,7 @@ import { setPage } from "../../redux/slices/filterSlice";
 import s from "./Pagination.module.scss";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 
-const Pagination = () => {
+export const Pagination = () => {
   const dispatch = useAppDispatch();
   const { page } = useAppSelector((state) => state.filter);
 
@@ -30,5 +30,3 @@ const Pagination = () => {
     />
   );
 };
-
-export default Pagination;

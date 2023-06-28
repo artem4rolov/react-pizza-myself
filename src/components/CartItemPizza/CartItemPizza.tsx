@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 import { addItem, minusItem, removeItem } from "../../redux/slices/cartSlice";
 
-import s from "./CartItem.module.scss";
+import s from "./CartItemPizza.module.scss";
 import { CartItem } from "../@types/pizza";
 import { useAppDispatch } from "../../redux/store";
 
@@ -11,7 +11,7 @@ type CartItemProps = {
   key: number;
 };
 
-const CartItemPizza: React.FC<CartItemProps> = ({ pizza }) => {
+export const CartItemPizza: React.FC<CartItemProps> = ({ pizza }) => {
   const dispatch = useAppDispatch();
 
   const { types, sizes, price, title, imageUrl, count } = pizza;
@@ -110,5 +110,3 @@ const CartItemPizza: React.FC<CartItemProps> = ({ pizza }) => {
     </div>
   );
 };
-
-export default CartItemPizza;

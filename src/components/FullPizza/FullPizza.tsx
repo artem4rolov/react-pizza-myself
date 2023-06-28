@@ -8,7 +8,7 @@ import { categories } from "../Category/Category";
 import ContentLoader from "react-content-loader";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 
-const FullPizza: React.FC = () => {
+export const FullPizza: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { currentPizza, status } = useAppSelector((state) => state.pizzas);
@@ -72,5 +72,3 @@ const FullPizza: React.FC = () => {
     </div>
   );
 };
-
-export default FullPizza;

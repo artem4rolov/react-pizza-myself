@@ -2,11 +2,10 @@ import { Route, Routes } from "react-router";
 import Home from "./views/Home/Home";
 import Cart from "./views/Cart/Cart";
 import Error from "./views/Error/Error";
-import Header from "./components/Header/Header";
 
 import s from "./App.module.scss";
-import FullPizza from "./components/FullPizza/FullPizza";
-import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
+
+import { FullPizza, ErrorBoundary, Header } from "./components";
 
 function App() {
   return (

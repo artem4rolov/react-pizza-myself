@@ -15,7 +15,7 @@ export const categories = [
   "Закрытые",
 ];
 
-const Category = () => {
+export const Category = () => {
   const dispatch = useDispatch();
   const { categoryId } = useAppSelector((state) => state.filter);
 
@@ -33,5 +33,3 @@ const Category = () => {
     </nav>
   );
 };
-
-export default Category;

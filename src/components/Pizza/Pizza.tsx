@@ -14,7 +14,7 @@ type PizzaProps = {
   pizza: PizzaType;
 };
 
-const Pizza: React.FC<PizzaProps> = ({ pizza }) => {
+export const Pizza: React.FC<PizzaProps> = ({ pizza }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { items } = useAppSelector((state) => state.cart);
@@ -138,5 +138,3 @@ const Pizza: React.FC<PizzaProps> = ({ pizza }) => {
     </div>
   );
 };
-
-export default Pizza;

@@ -1,8 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
-
-import Search from "../Search/Search";
 
 import { changeTotalPrice } from "../../redux/slices/cartSlice";
 
@@ -10,8 +7,9 @@ import s from "./Header.module.scss";
 import Logo from "../../assets/logo.svg";
 import Cart from "../../assets/cart.svg";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { Search } from "../Search/Search";
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -58,5 +56,3 @@ const Header: React.FC = () => {
     </header>
   );
 };
-
-export default Header;

@@ -2,17 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router";
 import qs from "qs";
 
-import Sort, { sortValue } from "../../components/Sort/Sort";
-import Pizza from "../../components/Pizza/Pizza";
-import Category from "../../components/Category/Category";
-import Pagination from "../../components/Pagination/Pagination";
-import Skeleton from "../../components/Skeleton/Skeleton";
+import { sortValue } from "../../components/Sort/Sort";
+import { Sort, Pizza, Category, Pagination, Skeleton } from "../../components";
 
 import { setFiltersFromUrl } from "../../redux/slices/filterSlice";
 import { fetchPizzas } from "../../redux/slices/pizzaSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 
 import s from "./Home.module.scss";
-import { useAppDispatch, useAppSelector } from "../../redux/store";
 
 const Home = () => {
   const navigate = useNavigate();

@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
-import CartItem from "../../components/CartItem/CartItem";
 import { changeTotalPrice, clearCart } from "../../redux/slices/cartSlice";
 
 import s from "./Cart.module.scss";
 import CartImage from "../../assets/cart.svg";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { CartItemPizza } from "../../components";
 
 const Cart = () => {
   const dispatch = useAppDispatch();
@@ -120,7 +120,7 @@ const Cart = () => {
             </div>
             {items &&
               items.map((item, index) => {
-                return <CartItem key={index} pizza={item} />;
+                return <CartItemPizza key={index} pizza={item} />;
               })}
             <div className={s.content__items}></div>
             <div className={s.cart__bottom}>

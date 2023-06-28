@@ -8,7 +8,7 @@ import CloseIcon from "../../assets/close.svg";
 import s from "./Search.module.scss";
 import { useAppDispatch } from "../../redux/store";
 
-const Search = () => {
+export const Search = () => {
   const dispatch = useAppDispatch();
   // стейт для input, локальный
   const [value, setValue] = React.useState("");
@@ -56,5 +56,3 @@ const Search = () => {
     </div>
   );
 };
-
-export default Search;
