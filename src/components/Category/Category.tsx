@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { setCatgeoryId } from "../../redux/slices/filterSlice";
+import { setCatgeoryId } from "../../redux/filter/slice";
 
 import s from "./Category.module.scss";
 import { useAppSelector } from "../../redux/store";

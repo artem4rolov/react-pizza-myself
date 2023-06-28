@@ -1,8 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
-type SearchTypeSlice = {
-  searchValue: string;
-};
+import { SearchTypeSlice } from "./types";
 
 const initialState: SearchTypeSlice = {
   searchValue: "", // значение поиска пицц

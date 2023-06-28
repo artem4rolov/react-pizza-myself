@@ -1,52 +1,7 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { PizzaType } from "../../components/@types/pizza";
-
-type FetchPizzasType = {
-  category: string;
-  sorting: string;
-  order: string;
-  search: string;
-  page: number;
-};
-
-enum StatusValues {
-  LOADING = "loading",
-  SUCCESS = "success",
-  FAILURE = "failure",
-}
-
-type PizzaSliceType = {
-  pizzas: PizzaType[];
-  status: StatusValues;
-  currentPizza: PizzaType[] | null;
-};
-
-export const fetchPizzas = createAsyncThunk(
-  "pizza/fetchPizzas",
-  async (params: FetchPizzasType) => {
-    const { category, sorting, order, search, page } = params;
-
-    const { data } = await axios.get<PizzaType[]>(
-      `https://64295b91ebb1476fcc479b12.mockapi.io/items?page=${
-        page + 1
-      }&limit=4${category}${sorting}${order}${search}`
-    );
-
-    return data;
-  }
-);
-
-export const fetchCurrentPizza = createAsyncThunk(
-  "pizza/fetchCurrentPizza",
-  async (id: string) => {
-    const { data } = await axios.get<PizzaType[]>(
-      `https://64295b91ebb1476fcc479b12.mockapi.io/items?id=${id}`
-    );
-
-    return data;
-  }
-);
+import { PizzaSliceType, StatusValues } from "./types";
+import { fetchCurrentPizza, fetchPizzas } from "./asyncActions";
 
 const initialState: PizzaSliceType = {
   pizzas: [],

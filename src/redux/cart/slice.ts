@@ -1,11 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CartItem } from "../../components/@types/pizza";
 import { getCartFromLocalStorage } from "../../utils/getCartFromLocalStorage";
-
-type ItemCartSlice = {
-  items: CartItem[];
-  totalPrice: number;
-};
+import { ItemCartSlice } from "./types";
 
 const initialState: ItemCartSlice = {
   items: getCartFromLocalStorage(),

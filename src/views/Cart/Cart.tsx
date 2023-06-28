@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
-import { changeTotalPrice, clearCart } from "../../redux/slices/cartSlice";
+import { changeTotalPrice, clearCart } from "../../redux/cart/slice";
 
 import s from "./Cart.module.scss";
 import CartImage from "../../assets/cart.svg";

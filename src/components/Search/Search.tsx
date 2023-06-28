@@ -1,7 +1,7 @@
 import React from "react";
 import debounce from "lodash.debounce";
 
-import { setSearchValue } from "../../redux/slices/searchSlice";
+import { setSearchValue } from "../../redux/search/slice";
 
 import SearchIcon from "../../assets/search.svg";
 import CloseIcon from "../../assets/close.svg";
