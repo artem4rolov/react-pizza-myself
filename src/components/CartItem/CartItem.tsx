@@ -81,7 +81,8 @@ const CartItemPizza: React.FC<CartItemProps> = ({ pizza }) => {
         </div>
       </div>
       <div className={s.cart__item_price}>
-        <b>{price} ₽</b>
+        {/* выводим цену за количество пицц каждого вида отдельно */}
+        <b>{price * count} ₽</b>
       </div>
       <div
         className={s.cart__item_remove}

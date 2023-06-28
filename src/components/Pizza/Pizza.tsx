@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 import { addItem } from "../../redux/slices/cartSlice";
@@ -8,6 +7,7 @@ import s from "./Pizza.module.scss";
 import { CartItem, PizzaType } from "../@types/pizza";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 
+// варинты теста
 const dough = ["тонкое", "традиционное"];
 
 type PizzaProps = {
@@ -25,6 +25,7 @@ const Pizza: React.FC<PizzaProps> = ({ pizza }) => {
   // объект пиццы в корзину
   const [pizzaCart, setPizzaCart] = React.useState<CartItem | undefined>();
 
+  // достаем данные пицца из props
   const { id, types, sizes, price, title, imageUrl } = pizza;
 
   // меняем цену в зависимости от размера пиццы
@@ -43,15 +44,17 @@ const Pizza: React.FC<PizzaProps> = ({ pizza }) => {
 
   // количество пицц одного вида (но разных размеров и теста)
   const checkCount = () => {
-    let number = 0;
+    let arr: CartItem[] = [];
 
     for (let i = 0; i < items.length; i++) {
+      // ищем одинаковые пиццы в корзине по id (их может быть несколько, поскольку у каждой разный размер и тесто)
       if (items[i].id === id) {
-        number = items[i].count;
+        arr.push(items[i]);
       }
     }
 
-    setCount(number);
+    // выводим количество одинаковых пицц в кнопку "добавить" у каждого компонента пиццы на главной странице
+    setCount(arr.reduce((sum, item) => sum + item.count, 0));
     return;
   };
 
@@ -61,7 +64,7 @@ const Pizza: React.FC<PizzaProps> = ({ pizza }) => {
     return () => {};
   }, [items]);
 
-  // готовый объект для корзины
+  // готовый объект пиццы для корзины
   React.useEffect(() => {
     if (pizza) {
       const cartItem: CartItem = {
