@@ -5,8 +5,8 @@ import qs from "qs";
 import { sortValue } from "../../components/Sort/Sort";
 import { Sort, Pizza, Category, Pagination, Skeleton } from "../../components";
 
-import { setFiltersFromUrl } from "../../redux/slices/filterSlice";
-import { fetchPizzas } from "../../redux/slices/pizzaSlice";
+import { setFiltersFromUrl } from "../../redux/filter/slice";
+import { fetchPizzas } from "../../redux/pizza/asyncActions";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 
 import s from "./Home.module.scss";

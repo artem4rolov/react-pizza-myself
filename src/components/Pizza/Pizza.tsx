@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
-import { addItem } from "../../redux/slices/cartSlice";
+import { addItem } from "../../redux/cart/slice";
 
 import s from "./Pizza.module.scss";
 import { CartItem, PizzaType } from "../@types/pizza";

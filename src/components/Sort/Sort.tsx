@@ -1,6 +1,6 @@
 import React from "react";
 
-import { setSort } from "../../redux/slices/filterSlice";
+import { setSort } from "../../redux/filter/slice";
 
 import s from "./Sort.module.scss";
 import ArrowUp from "../../assets/arrowUp.svg";

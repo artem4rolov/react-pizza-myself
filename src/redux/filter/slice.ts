@@ -1,13 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { SortValueType } from "../../components/Sort/Sort";
+import { FilterTypeSlice } from "./types";
 
-type FilterTypeSlice = {
-  categoryId: number;
-  sort: SortValueType;
-  page: number;
-};
-
-const initialState = {
+const initialState: FilterTypeSlice = {
   categoryId: 0,
   sort: {
     value: "популярности (по возрастанию)",

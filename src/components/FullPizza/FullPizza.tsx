@@ -1,6 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCurrentPizza, fetchPizzas } from "../../redux/slices/pizzaSlice";
+import { fetchCurrentPizza } from "../../redux/pizza/asyncActions";
 import { useNavigate, useParams } from "react-router";
 
 import s from "./FullPizza.module.scss";

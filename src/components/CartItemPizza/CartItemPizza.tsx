@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { addItem, minusItem, removeItem } from "../../redux/slices/cartSlice";
+import { addItem, minusItem, removeItem } from "../../redux/cart/slice";
 
 import s from "./CartItemPizza.module.scss";
 import { CartItem } from "../@types/pizza";
