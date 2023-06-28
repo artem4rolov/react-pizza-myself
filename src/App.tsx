@@ -1,11 +1,18 @@
 import { Route, Routes } from "react-router";
 import Home from "./views/Home/Home";
-import Cart from "./views/Cart/Cart";
-import Error from "./views/Error/Error";
+// import Cart from "./views/Cart/Cart";
+// import Error from "./views/Error/Error";
 
 import s from "./App.module.scss";
 
 import { FullPizza, ErrorBoundary, Header } from "./components";
+import { Suspense, lazy } from "react";
+
+const Error = lazy(
+  () => import(/*chunkFilename: "Error"*/ "./views/Error/Error")
+);
+
+const Cart = lazy(() => import(/*chunkFilename: "Cart"*/ "./views/Cart/Cart"));
 
 function App() {
   return (
@@ -15,7 +22,15 @@ function App() {
           <Header />
           <Routes>
             <Route index path="/" element={<Home />} />
-            <Route index path="/cart" element={<Cart />} />
+            <Route
+              index
+              path="/cart"
+              element={
+                <Suspense fallback={<span>Loading...</span>}>
+                  <Cart />
+                </Suspense>
+              }
+            />
             <Route
               index
               path="/:id"
@@ -25,7 +40,15 @@ function App() {
                 </ErrorBoundary>
               }
             />
-            <Route index path="/*" element={<Error />} />
+            <Route
+              index
+              path="/*"
+              element={
+                <Suspense fallback={<span>Loading...</span>}>
+                  <Error />
+                </Suspense>
+              }
+            />
           </Routes>
         </div>
       </div>
