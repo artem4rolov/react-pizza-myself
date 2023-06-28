@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/store";
 const Cart = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const isMounted = React.useRef(false);
 
   const { items, totalPrice } = useAppSelector((state) => state.cart);
 
@@ -18,13 +19,22 @@ const Cart = () => {
     items && items.reduce((sum, item) => sum + item.count, 0);
 
   React.useEffect(() => {
-    if (items && items.length > 0) {
+    if (items && items.length > 0 && isMounted.current) {
+      // заносим пиццы корзины в локальное хранилище
+      localStorage.setItem("cart", JSON.stringify(items));
       dispatch(changeTotalPrice());
       return;
     }
 
-    return () => {};
+    isMounted.current = true;
+
+    // при размонтировании (удалении всех пицц) - очищаем локальное хранилище
+    return () => {
+      localStorage.setItem("cart", JSON.stringify([]));
+    };
   }, [items]);
+
+  // console.log(localStorage.getItem("cart"));
 
   return (
     <div className={s.content}>

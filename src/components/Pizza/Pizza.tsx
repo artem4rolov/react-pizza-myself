@@ -60,6 +60,7 @@ const Pizza: React.FC<PizzaProps> = ({ pizza }) => {
 
   React.useEffect(() => {
     checkCount();
+    localStorage.setItem("cart", JSON.stringify(items));
 
     return () => {};
   }, [items]);
